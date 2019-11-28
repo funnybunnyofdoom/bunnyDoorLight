@@ -1,0 +1,18 @@
+--This program controls doors with only
+--a disk drive
+
+function doorCheck()
+  while true do
+    event,x,y,side = os.pullEvent() --Listen for events
+    if event == "disk" then --Check for disks
+      disk.eject("right") --kick out disk
+      redstone.setAnalogOutput("front",10) --open door
+      os.sleep(10) --pause
+      redstone.setAnalogOutput("front",0) --close door
+      disk.eject("right") --kick out any extra disks
+      os.reboot() -- clean reboot each time.
+    end
+  end
+end
+
+doorCheck()
